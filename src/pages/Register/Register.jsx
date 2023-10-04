@@ -27,7 +27,7 @@ createUser(email, password)
   
 })
 
-    // console.log(from.get('email'));
+    console.log(from.get('email'));
     }
     return (
         <div>
