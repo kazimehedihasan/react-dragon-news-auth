@@ -1,13 +1,33 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvidor";
 
 
 const Register = () => {
+  const {createUser} = useContext(AuthContext)
     const hondleRegister = e =>{
         e.preventDefault();
         console.log(e.currentTarget);
     const from = new FormData(e.currentTarget);
-    console.log(from.get('email'));
+
+    const name = from.get('name');
+    const photo = from.get('photo');
+    const email = from.get('email');
+    const password = from.get('password');
+    console.log(name, photo, email, password);
+
+    // create user 
+createUser(email, password)
+.then(result => {
+  console.log(result)
+})
+.catch(error => {
+  console.log(error)
+  
+})
+
+    // console.log(from.get('email'));
     }
     return (
         <div>
@@ -19,25 +39,25 @@ const Register = () => {
           <label className="label">
             <span className="label-text">Name</span>
           </label>
-          <input type="text" name="name" required placeholder="name" className="input input-bordered" required />
+          <input type="text" name="name" required placeholder="name" className="input input-bordered"  />
         </div>
          <div className="form-control">
           <label className="label">
             <span className="label-text">Photo URL</span>
           </label>
-          <input type="text" name="photo" required placeholder="Photo URL" className="input input-bordered" required />
+          <input type="text" name="photo" required placeholder="Photo URL" className="input input-bordered" />
         </div>
          <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="email" name="email" required placeholder="email" className="input input-bordered" required />
+          <input type="email" name="email" required placeholder="email" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
           </label>
-          <input type="password" name="password" required placeholder="password" className="input input-bordered" required />
+          <input type="password" name="password" required placeholder="password" className="input input-bordered"  />
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
